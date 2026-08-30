@@ -26,7 +26,7 @@ function prepare(sql) {
     },
     run: async (...args) => {
       const res = await client.execute({ sql, args });
-      return { lastInsertRowid: res.lastInsertRowid, changes: res.rowsAffected };
+      return { lastInsertRowid: res.lastInsertRowid != null ? Number(res.lastInsertRowid) : null, changes: res.rowsAffected };
     },
   };
 }
