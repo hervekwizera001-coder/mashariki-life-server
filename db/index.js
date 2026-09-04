@@ -12,8 +12,6 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-// Thin wrapper so route code can stay close to the familiar
-// `db.prepare(sql).get/.all/.run(...)` shape, just with `await` added.
 function prepare(sql) {
   return {
     get: async (...args) => {
@@ -31,7 +29,6 @@ function prepare(sql) {
   };
 }
 
-// Runs several { sql, args } statements as one atomic write.
 async function batch(statements) {
   return client.batch(
     statements.map((s) => ({ sql: s.sql, args: s.args || [] })),
@@ -77,6 +74,7 @@ CREATE TABLE IF NOT EXISTS solution_sectors (
 CREATE TABLE IF NOT EXISTS product_categories (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
+  image TEXT,
   sort_order INTEGER DEFAULT 0
 );
 
@@ -160,9 +158,13 @@ CREATE TABLE IF NOT EXISTS job_applications (
 );
 `);
 
-  // Migration for databases created before the `image` column existed.
   try {
     await client.execute("ALTER TABLE team_members ADD COLUMN image TEXT");
+  } catch (e) {
+    // Column already exists — ignore.
+  }
+  try {
+    await client.execute("ALTER TABLE product_categories ADD COLUMN image TEXT");
   } catch (e) {
     // Column already exists — ignore.
   }
