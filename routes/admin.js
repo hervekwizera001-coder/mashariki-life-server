@@ -41,7 +41,7 @@ const RESOURCES = {
   companies: { table: "companies", fields: ["slug", "name", "tag", "tagline"] },
   divisions: { table: "divisions", fields: ["name", "desc", "icon", "images", "detailed_desc"], json: ["images"] },
   "solution-sectors": { table: "solution_sectors", fields: ["name", "desc"] },
-  "product-categories": { table: "product_categories", fields: ["name"] },
+  "product-categories": { table: "product_categories", fields: ["name", "image"] },
   team: { table: "team_members", fields: ["name", "role", "dept", "bio", "image"] },
   news: { table: "news", fields: ["slug", "title", "category", "date", "excerpt", "body"] },
   jobs: { table: "jobs", fields: ["slug", "title", "location", "type", "team", "description", "is_open"] },
