@@ -22,8 +22,9 @@ const RESOURCES = {
     { key: "name", label: "Name", type: "text" },
     { key: "desc", label: "Description", type: "text" },
   ]},
-  "product-categories": { label: "Product Categories", fields: [
+    "product-categories": { label: "Product Categories", fields: [
     { key: "name", label: "Name", type: "text" },
+    { key: "image", label: "Image URL", type: "text" },
   ]},
   team: { label: "Team", fields: [
     { key: "name", label: "Name", type: "text" },
