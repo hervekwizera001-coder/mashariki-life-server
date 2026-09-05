@@ -35,8 +35,7 @@ router.get("/solution-sectors", async (req, res) => {
 });
 
 router.get("/product-categories", async (req, res) => {
-  const rows = await db.prepare("SELECT name FROM product_categories ORDER BY sort_order").all();
-  res.json(rows.map((r) => r.name));
+  res.json(await db.prepare("SELECT name, image FROM product_categories ORDER BY sort_order").all());
 });
 
 router.get("/team", async (req, res) => {
